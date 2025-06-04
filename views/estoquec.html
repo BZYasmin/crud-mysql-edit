@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h2>Controle de Estoque de Console</h2>
+
+<details>
+    <summary>[ Cadastrar novo console ]</summary>
+    <div class="col-md-4">
+        <form action="{{url_for('estoquec')}}" method="POST">
+            <input type="text" name="nome" placeholder="Nome" class="form-control" required>
+            <input type="text" name="fabricante" placeholder="Fabricante" class="form-control" required>
+            <input type="number" name="preco" placeholder="Preço" class="form-control" required>
+            <input type="number" name="quantidade" placeholder="Quantidade" class="form-control" required>
+            <input type="submit" value="Cadastrar" class="btn btn-success">
+            <input type="reset" value="Limpar" class="btn btn-danger">
+        </form>
+    </div>
+</details>
+
+<hr>
+
+<table class="table table-bordered table-hover">
+    <thead class="table-dark">
+        <tr>
+            <th>Nome:</th>
+            <th>Fabricante:</th>
+            <th>Preço:</th>
+            <th>Quantidade:</th>
+            <th colspan="2">Ações:</th>
+        </tr>
+    </thead>
+    {% for console in consoleestoque %}
+    <tbody>
+        <tr>
+        <td>{{console.nome}}</td>
+        <td>{{console.fabricante}}</td>
+        <td>{{console.preco}}</td>
+        <td>{{console.quantidade}}</td>
+     
+        <td><a href="{{url_for('editconsole', id=console.id)}}" class="btn btn-warning">Editar</a></td>
+        <td><button class="btn btn-danger">Excluir</button></td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock content%}
